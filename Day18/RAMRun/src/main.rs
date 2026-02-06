@@ -1,5 +1,5 @@
 use std::cmp::Ordering;
-use std::collections::{BinaryHeap, HashMap, HashSet};
+use std::collections::{BinaryHeap, HashMap};
 use std::fs;
 
 #[derive(Copy, Clone, Eq, PartialEq)]
@@ -55,7 +55,6 @@ fn parse_puzzle_input() -> Vec<(usize, usize)> {
 fn dijkstra(map: &Vec<Vec<char>>, start: (usize, usize), goal: (usize, usize)) -> usize {
     let mut pq = BinaryHeap::new();
     let mut minimal_scores: HashMap<(usize, usize), usize> = HashMap::new();
-    // let mut previous_tiles: HashMap<(usize, usize), Vec<(usize, usize)>> = HashMap::new();
 
     // Start at (0, 0) with 0 steps
     pq.push(State {
@@ -122,7 +121,23 @@ fn main() {
         i += 1;
     }
     print_grid(&grid);
+    let mut steps: usize;
 
-    let steps = dijkstra(&grid, (0, 0), (grid.len() - 1, grid[0].len() - 1));
+    steps = dijkstra(&grid, (0, 0), (grid.len() - 1, grid[0].len() - 1));
     println!("Minimal steps: {}", steps);
+
+    // Add more obstacles one by one
+    while i < coords.len() {
+        let (x, y) = coords[i];
+        grid[x][y] = '#';
+
+        steps = dijkstra(&grid, (0, 0), (grid.len() - 1, grid[0].len() - 1));
+        // println!("Obstacle: {}, steps: {}", i, steps);
+
+        if steps == usize::MAX {
+            println!("Path becomes blocked at: {},{}", y, x);
+            break;
+        }
+        i += 1;
+    }
 }
