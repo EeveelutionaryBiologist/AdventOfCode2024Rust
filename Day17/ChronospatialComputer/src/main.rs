@@ -63,6 +63,14 @@ impl Processor {
         println!("=> {:?}", self.output);
     }
 
+    fn reset(&mut self) {
+        self.Register_A = 0;
+        self.Register_B = 0;
+        self.Register_C = 0;
+        self.instruct_pointer = 0;
+        self.output = Vec::new();
+    }
+
     fn run(&mut self) {
         while self.instruct_pointer + 1 < self.program.len() {
             let instruction = self.program[self.instruct_pointer];
@@ -101,9 +109,9 @@ fn parse_puzzle_input() -> Processor {
             .unwrap_or(0)
     };
 
-    let reg_a = get_val(); // 
-    let reg_b = get_val(); // 
-    let reg_c = get_val(); // 
+    let reg_a = get_val();  
+    let reg_b = get_val();  
+    let reg_c = get_val(); 
 
     lines.next();
 
@@ -114,7 +122,7 @@ fn parse_puzzle_input() -> Processor {
         .unwrap_or("")
         .split(',')
         .map(|s| s.trim().parse::<u32>().unwrap())
-        .collect::<Vec<u32>>(); // 
+        .collect::<Vec<u32>>(); 
 
     Processor {
         Register_A: reg_a,
@@ -130,5 +138,6 @@ fn main() {
     let mut processor = parse_puzzle_input();
     processor.print_state();
     processor.run();
+    println!();
     processor.print_state();
 }
