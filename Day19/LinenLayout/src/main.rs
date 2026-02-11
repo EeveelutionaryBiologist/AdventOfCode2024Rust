@@ -52,14 +52,14 @@ fn count_viable_patterns<'a>(
 fn solve_for_pattern<'a>(
     pattern: &'a str,
     available: &HashSet<String>,
-    cache: &mut HashMap<&'a str, bool>,
+    cache: &mut HashSet<&'a str>,
     max_len: usize,
 ) -> bool {
     if pattern.is_empty() {
         return true;
     }
-    if let Some(solvable) = cache.get(pattern) {
-        return *solvable;
+    if cache.contains(pattern) {
+        return true;
     }
 
     let limit = std::cmp::min(max_len, pattern.len());
@@ -69,7 +69,7 @@ fn solve_for_pattern<'a>(
 
         if available.contains(chunk) {
             if solve_for_pattern(&pattern[i..], available, cache, max_len) {
-                cache.insert(chunk, true);
+                cache.insert(chunk);
                 return true;
             }
         }
@@ -90,7 +90,7 @@ fn main() {
 
     let mut count: u32 = 0;
     let mut solutions: u64 = 0;
-    let mut cache: HashMap<&str, bool> = HashMap::new();
+    let mut cache: HashSet<&str> = HashSet::new();
     let mut solution_cache: HashMap<&str, u64> = HashMap::new();
 
     for pattern in patterns.iter() {
