@@ -55,13 +55,10 @@ fn solve_for_pattern<'a>(
     cache: &mut HashSet<&'a str>,
     max_len: usize,
 ) -> bool {
-    if pattern.is_empty() {
+    if pattern.is_empty() || cache.contains(pattern) {
         return true;
     }
-    if cache.contains(pattern) {
-        return true;
-    }
-
+    
     let limit = std::cmp::min(max_len, pattern.len());
 
     for i in 1..=limit {
