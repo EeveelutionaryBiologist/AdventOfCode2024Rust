@@ -58,7 +58,7 @@ fn solve_for_pattern<'a>(
     if pattern.is_empty() || cache.contains(pattern) {
         return true;
     }
-    
+
     let limit = std::cmp::min(max_len, pattern.len());
 
     for i in 1..=limit {
@@ -66,7 +66,7 @@ fn solve_for_pattern<'a>(
 
         if available.contains(chunk) {
             if solve_for_pattern(&pattern[i..], available, cache, max_len) {
-                cache.insert(chunk);
+                cache.insert(pattern);
                 return true;
             }
         }
