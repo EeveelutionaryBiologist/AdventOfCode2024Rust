@@ -83,6 +83,39 @@ fn traverse_path(map: &Vec<Vec<char>>) -> HashMap<(usize, usize), u32> {
     path
 }
 
+fn vector_distance(point_a: (usize, usize), point_b: (usize, usize)) -> u32 {
+    ((point_a.0 as i32 - point_b.0 as i32).abs() + (point_a.1 as i32 - point_b.1 as i32).abs())
+        as u32
+}
+
+fn find_by_vector_distance(
+    map: &Vec<Vec<char>>,
+    path: &HashMap<(usize, usize), u32>,
+    start: (usize, usize),
+    goal: (usize, usize),
+) {
+    // let mut shortcuts: HashMap<((usize, usize), (usize, usize)), i32> = HashMap::new();
+    let mut large_saves: u32 = 0;
+
+    for ((pos_i, pos_j), &steps_1) in path.iter() {
+        for ((target_i, target_j), &steps_2) in path.iter() {
+            let distance = vector_distance((*pos_i, *pos_j), (*target_i, *target_j));
+
+            if distance <= 20 && distance > 0 && steps_2 > steps_1 {
+                let shortcut_distance: i32 = (steps_2 as i32 - steps_1 as i32) - distance as i32;
+
+                if shortcut_distance >= 100 {
+                    large_saves += 1;
+                }
+            }
+        }
+    }
+    println!(
+        "Saves using 20 step shortcuts (> 100 ps saved): {}",
+        large_saves
+    );
+}
+
 fn find_shortcuts(
     map: &Vec<Vec<char>>,
     path: &HashMap<(usize, usize), u32>,
@@ -100,7 +133,7 @@ fn find_shortcuts(
 
     let next_steps = [(1, 0), (0, 1), (-1, 0), (0, -1)];
 
-    while current_i != goal.0 || current_j != goal.1 {   
+    while current_i != goal.0 || current_j != goal.1 {
         let mut next_cycle_i = 0;
         let mut next_cycle_j = 0;
 
@@ -136,7 +169,8 @@ fn find_shortcuts(
                             if let Some(steps_1) = path.get(&(next_i_2, next_j_2))
                                 && let Some(steps_2) = path.get(&(current_i, current_j))
                             {
-                                let shortcut_distance: i32 = (*steps_1 as i32 - *steps_2 as i32) -2;
+                                let shortcut_distance: i32 =
+                                    (*steps_1 as i32 - *steps_2 as i32) - 2;
 
                                 if shortcut_distance > 0 {
                                     shortcuts.insert(
@@ -179,6 +213,10 @@ fn main() {
     if let Some((start_i, start_j)) = find_start_position(&map)
         && let Some((goal_i, goal_j)) = find_end_position(&map)
     {
-        let shortcuts = find_shortcuts(&map, &path, (start_i, start_j), (goal_i, goal_j));
+        // Part I  - shortcuts of max 2 picoseconds
+        find_shortcuts(&map, &path, (start_i, start_j), (goal_i, goal_j));
+
+        // Part II - shotcuts of up to 20 picoseconds
+        find_by_vector_distance(&map, &path, (start_i, start_j), (goal_i, goal_j));
     }
 }
