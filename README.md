@@ -8,4 +8,13 @@ To run a specific solution, navigate to the day and project folder (i.e. cd Day2
 
 >cargo run
 
-Own puzzle inputs are provided in the corresponding folders. 
+Example puzzle inputs are provided in the corresponding folders (typically as puzzle_input.txt). However, for the real input, an account on 
+https://adventofcode.com/ will be required. Navigate to https://adventofcode.com/2024 for a list of the exercises solved here.
+
+
+### Currently missing
+
+- Day 17 Part 2
+- Day 21 Part 2
+- Day 24
+- Day 25
