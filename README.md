@@ -16,5 +16,5 @@ https://adventofcode.com/ will be required. Navigate to https://adventofcode.com
 
 - Day 17 Part 2
 - Day 21 Part 2
-- Day 24
+- Day 24 Part 2
 - Day 25
