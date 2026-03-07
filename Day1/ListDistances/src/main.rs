@@ -2,8 +2,7 @@ use std::fs;
 use std::iter::zip;
 
 fn main() {
-    // Read the entire file into a string
-    let input = fs::read_to_string("data.txt").expect("No file, lol");
+    let input = fs::read_to_string("puzzle_input.txt").expect("No file, lol");
 
     // Process the lines and unzip them into two separate vectors
     let (mut left_list, mut right_list): (Vec<i32>, Vec<i32>) = input
@@ -19,9 +18,6 @@ fn main() {
 
     left_list.sort();
     right_list.sort();
-
-    // Verification
-    println!("First few of left: {:?}", &left_list[..3]);
 
     // Calculate distances
     let mut distances = Vec::new();
@@ -44,7 +40,6 @@ fn main() {
     }
     let sum: i32 = distances.iter().sum();
 
-    // Print results
     println!("Sum of pair distances: {}", sum);
     println!("Similarity score: {}", similarity_score);
 }

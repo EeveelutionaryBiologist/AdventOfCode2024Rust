@@ -1,7 +1,7 @@
 use std::fs;
 
 fn read_reactor_codes() -> Vec<Vec<i32>> {
-    let input = fs::read_to_string("reactor_codes.txt").expect("No file, lol");
+    let input = fs::read_to_string("puzzle_input.txt").expect("No file, lol");
 
     let data: Vec<Vec<i32>> = input
         .lines()

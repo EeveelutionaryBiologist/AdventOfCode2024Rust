@@ -2,7 +2,7 @@ use regex::Regex;
 use std::fs;
 
 fn read_input() -> String {
-    let input = fs::read_to_string("scrambled_code.txt")
+    let input = fs::read_to_string("puzzle_input.txt")
         .expect("No file found.")
         .replace('\n', "");
     split_by_commands(input)
