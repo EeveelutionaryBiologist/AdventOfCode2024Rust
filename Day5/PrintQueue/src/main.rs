@@ -2,7 +2,7 @@ use std::collections::HashSet;
 use std::fs;
 
 fn load_print_rules() -> HashSet<(u32, u32)> {
-    let input = fs::read_to_string("print_rules.txt").expect("No Rules file?");
+    let input = fs::read_to_string("puzzle_input_1.txt").expect("No Rules file?");
     let mut order_rules = HashSet::new();
 
     for line in input.lines() {
@@ -16,7 +16,7 @@ fn load_print_rules() -> HashSet<(u32, u32)> {
 }
 
 fn load_update_txt() -> Vec<Vec<u32>> {
-    let input = fs::read_to_string("update.txt").expect("No Update file?");
+    let input = fs::read_to_string("puzzle_input_2.txt").expect("No Update file?");
 
     let data: Vec<Vec<u32>> = input
         .lines()

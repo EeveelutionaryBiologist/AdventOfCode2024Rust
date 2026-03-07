@@ -161,7 +161,7 @@ impl Guard {
 }
 
 fn load_map() -> Vec<Vec<char>> {
-    let input = fs::read_to_string("map.txt").expect("There is no map file?");
+    let input = fs::read_to_string("puzzle_input.txt").expect("There is no map file?");
 
     let data: Vec<Vec<char>> = input
         .lines()

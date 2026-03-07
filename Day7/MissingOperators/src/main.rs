@@ -1,7 +1,7 @@
 use std::fs;
 
 fn read_equations() -> Vec<Vec<u64>> {
-    let input = fs::read_to_string("equations.txt").expect("If only I had a file... .__.");
+    let input = fs::read_to_string("puzzle_input.txt").expect("If only I had a file... .__.");
 
     let data: Vec<Vec<u64>> = input
         .lines()

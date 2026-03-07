@@ -45,7 +45,7 @@ fn print_segment_map(segment_map: &Vec<MemorySegment>) {
 }
 
 fn read_disk_map() -> Vec<u16> {
-    let input = fs::read_to_string("disk_map.txt").expect("There is no map file?");
+    let input = fs::read_to_string("puzzle_input.txt").expect("There is no map file?");
     let data: Vec<u16> = input
         .lines()
         .flat_map(|line| {

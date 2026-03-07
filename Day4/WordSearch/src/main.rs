@@ -1,7 +1,7 @@
 use std::fs;
 
 fn parse_word_puzzle() -> Vec<Vec<char>> {
-    let input = fs::read_to_string("word_search.txt").expect("There is no file, maan.");
+    let input = fs::read_to_string("puzzle_input.txt").expect("There is no file, maan.");
     let data: Vec<Vec<char>> = input
         .lines()
         .filter(|line| !line.trim().is_empty())
